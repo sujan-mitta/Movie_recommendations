@@ -6,8 +6,8 @@ from sklearn.metrics.pairwise import linear_kernel
 app = Flask(__name__)
 
 # Load and prepare data
-df2 = pd.read_csv('D:\\sujan\\personal projects\\movie_recommendations\\tmdb_5000_movies.csv')
-df1 = pd.read_csv('D:\\sujan\\personal projects\\movie_recommendations\\tmdb_5000_credits.csv')
+df2 = pd.read_csv('tmdb_5000_movies.csv')
+df1 = pd.read_csv('tmdb_5000_credits.csv')
 df1.columns = ['id', 'tittle', 'cast', 'crew']
 df2 = df2.merge(df1, on='id')
 
