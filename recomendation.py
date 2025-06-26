@@ -46,6 +46,8 @@ def index():
     all_movies = df2['title'].tolist()
     return render_template('index.html', movies=all_movies, recommendations=recommendations, query=query)
 
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
+
