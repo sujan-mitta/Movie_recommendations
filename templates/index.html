@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Movie Recommendation System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        select {
+            width: 80%;
+            padding: 8px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            padding: 8px;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            box-shadow: 0 0 4px #ddd;
+        }
+        .no-results {
+            color: #888;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+
+    <form method="POST" action="/">
+        <select name="movie_title" required>
+            <option value="" disabled selected>Select a movie</option>
+            {% for movie in movies %}
+                {% if movie == query %}
+                    <option value="{{ movie }}" selected>{{ movie }}</option>
+                {% else %}
+                    <option value="{{ movie }}">{{ movie }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <br />
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    {% if recommendations %}
+        <h2>Top Recommendations for "{{ query }}"</h2>
+        <ul>
+            {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+            {% endfor %}
+        </ul>
+    {% elif query %}
+        <p class="no-results">No recommendations found for "{{ query }}"</p>
+    {% endif %}
+</body>
+</html>
